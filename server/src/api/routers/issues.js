@@ -16,4 +16,8 @@ router.get("/issues", async (req, res) => {
   }
 });
 
+router.get("/users/:user/issues", async (req, res) => {
+  res.status(501).send({ error: "Not implemented" });
+});
+
 module.exports = router;
