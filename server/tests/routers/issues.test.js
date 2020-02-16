@@ -14,6 +14,11 @@ describe("GET /issues", () => {
 
     expect(Array.isArray(response.body)).toBe(true);
     expect(response.body.length).toBe(mockIssues.length);
+
+    //check if scores are in order
+    const scores = response.body.map(issue => issue.score);
+    const scoresInOrder = scores.concat().sort((a, b) => b - a);
+    expect(scores).toEqual(scoresInOrder);
   });
 });
 

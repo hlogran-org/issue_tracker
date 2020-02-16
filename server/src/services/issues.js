@@ -10,7 +10,7 @@ module.exports = class IssuesService {
       .map(issue =>
         Object.assign({ score: this.weightScoreFunction(issue) }, issue)
       )
-      .sort((a, b) => a.score - b.score);
+      .sort((a, b) => b.score - a.score);
   }
   async getAll() {
     try {
