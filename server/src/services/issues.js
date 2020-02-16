@@ -20,4 +20,15 @@ module.exports = class IssuesService {
       throw err;
     }
   }
+  async getByUser(user) {
+    try {
+      const issues = await githubAPI.getIssues();
+      const userIssues = issues.filter(issue =>
+        issue.assignees.some(assignee => assignee.login === user)
+      );
+      return this._parseIssuesList(userIssues);
+    } catch (err) {
+      throw err;
+    }
+  }
 };

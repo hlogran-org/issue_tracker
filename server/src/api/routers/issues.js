@@ -17,7 +17,13 @@ router.get("/issues", async (req, res) => {
 });
 
 router.get("/users/:user/issues", async (req, res) => {
-  res.status(501).send({ error: "Not implemented" });
+  try {
+    const { user } = req.params;
+    const issues = await issuesService.getByUser(user);
+    res.json(issues);
+  } catch (error) {
+    res.status(400).send({ error: error.message });
+  }
 });
 
 module.exports = router;
