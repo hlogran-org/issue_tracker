@@ -1,0 +1,23 @@
+{
+  "name": "issue_tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hlogran-org/issue_tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hlogran-org/issue_tracker/issues"
+  },
+  "homepage": "https://github.com/hlogran-org/issue_tracker#readme",
+  "dependencies": {
+    "concurrently": "5.1.0"
+  }
+}
