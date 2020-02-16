@@ -1,11 +1,11 @@
 "use strict";
 
 const express = require("express");
-const router = new express.Router();
-
+const weightsScodeFunction = require("../../helpers/weightScoreFunction");
 const IssuesService = require("../../services/issues.js");
 
-const issuesService = new IssuesService();
+const router = new express.Router();
+const issuesService = new IssuesService(weightsScodeFunction);
 
 router.get("/issues", async (req, res) => {
   try {
