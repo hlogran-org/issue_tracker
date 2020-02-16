@@ -33,6 +33,8 @@ const issue_all_priorities_today = createMockIssue([
   "Low Priority"
 ]);
 
+const issue_low_priority_seven_days_ago = createMockIssue("Low Priority", 7);
+
 module.exports = {
   issue_critical_priority_today,
   issue_very_high_priority_today,
@@ -41,6 +43,7 @@ module.exports = {
   issue_low_priority_today,
   issue_all_priorities_today,
   issue_no_priority_today,
+  issue_low_priority_seven_days_ago,
   allIssues: [
     issue_critical_priority_today,
     issue_very_high_priority_today,
@@ -48,6 +51,7 @@ module.exports = {
     issue_mid_priority_today,
     issue_low_priority_today,
     issue_all_priorities_today,
-    issue_no_priority_today
+    issue_no_priority_today,
+    issue_low_priority_seven_days_ago
   ]
 };
