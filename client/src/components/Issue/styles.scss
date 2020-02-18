@@ -1,0 +1,70 @@
+$score-size: 75px;
+
+.issue {
+  width: 100%;
+  border: 1px solid #ededed;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f3f4f8;
+  }
+
+  &-score {
+    width: $score-size;
+    height: $score-size;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 23px;
+    color: #4a4a4a;
+
+    &-overdue {
+      color: #d03626;
+    }
+  }
+
+  &-body {
+    flex-grow: 1;
+    flex-shrink: 1;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    overflow: hidden;
+
+    &-item {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 98%;
+
+      &-title {
+        color: #3d8bd6;
+      }
+
+      &-info {
+        color: #c3c3c3;
+      }
+    }
+
+    .badge {
+      background-color: #ebebeb;
+      margin: -3px 3px;
+      display: inline-block;
+      padding: 0.25em 0.8em;
+      font-size: 80%;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: 0.25rem;
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+  }
+}

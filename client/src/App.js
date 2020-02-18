@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import UsersDropdownList from "./components/UsersDropdownList";
+import Issue from "./components/Issue";
 import "./App.css";
 
 function App() {
@@ -18,7 +19,6 @@ function App() {
       response = await fetch("/issues");
       const issues = await response.json();
       setIssues(issues);
-      console.log(issues);
     })();
   }, []);
 
@@ -30,7 +30,11 @@ function App() {
         </Col>
       </Row>
       <Row>
-        <Col>Issues will be displayed here</Col>
+        <Col>
+          {issues.map(issue => (
+            <Issue key={issue.id} issue={issue} />
+          ))}
+        </Col>
       </Row>
     </Container>
   );
