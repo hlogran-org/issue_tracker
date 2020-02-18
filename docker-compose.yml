@@ -1,0 +1,8 @@
+version: "2.1"
+
+services:
+  issue_tracker:
+    image: issue_tracker
+    build: .
+    ports:
+      - 3000:3000
