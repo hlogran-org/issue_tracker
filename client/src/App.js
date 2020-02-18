@@ -3,6 +3,7 @@ import { Container, Row, Col, Alert } from "react-bootstrap";
 import queryString from "query-string";
 import UsersDropdownList from "./components/UsersDropdownList";
 import Issue from "./components/Issue";
+import Loading from "./components/Loading";
 import "./App.css";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   const [issues, setIssues] = useState([]);
   const [who, setWho] = useState(null);
   const [validUser, setValidUser] = useState(true);
+  const [loadingIssues, setLoadingIssues] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -31,6 +33,7 @@ function App() {
       response = await fetch(url);
       const issues = await response.json();
       setIssues(issues);
+      setLoadingIssues(false);
     })();
   }, []);
 
@@ -65,9 +68,11 @@ function App() {
         </Row>
         <Row>
           <Col>
-            {issues.map(issue => (
-              <Issue key={issue.id} issue={issue} />
-            ))}
+            {loadingIssues ? (
+              <Loading />
+            ) : (
+              issues.map(issue => <Issue key={issue.id} issue={issue} />)
+            )}
           </Col>
         </Row>
       </Container>
