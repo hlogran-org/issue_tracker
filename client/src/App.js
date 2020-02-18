@@ -5,13 +5,20 @@ import "./App.css";
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [issues, setIssues] = useState([]);
 
   useEffect(() => {
     (async () => {
+      //fetch users
       let response = await fetch("/users");
       const users = await response.json();
       setUsers(users);
-      console.log(users);
+
+      //fetch issues
+      response = await fetch("/issues");
+      const issues = await response.json();
+      setIssues(issues);
+      console.log(issues);
     })();
   }, []);
 
