@@ -5,7 +5,7 @@ import "./styles.scss";
 const ALL_USERS_TEXT = "All users";
 
 export default function UsersDropdownList(props) {
-  const { users, selected, onChange } = props;
+  const { users, selected, onChange, loading } = props;
 
   return (
     <Form.Group as={Row} className="ml-0 mr-0 align-items-center">
@@ -13,16 +13,23 @@ export default function UsersDropdownList(props) {
       <Form.Control
         as="select"
         id="ddlUsers"
-        className="users-drop-down-list"
+        className={
+          "users-drop-down-list" +
+          (loading ? " users-drop-down-list-loading" : "")
+        }
         value={selected || ALL_USERS_TEXT}
         onChange={onChange}
       >
-        <option value={""}>{ALL_USERS_TEXT}</option>
-        {users.map(({ login: user }) => (
-          <option key={user} value={user}>
-            {user}
-          </option>
-        ))}
+        {!loading && (
+          <>
+            <option value={""}>{ALL_USERS_TEXT}</option>
+            {users.map(({ login: user }) => (
+              <option key={user} value={user}>
+                {user}
+              </option>
+            ))}
+          </>
+        )}
       </Form.Control>
     </Form.Group>
   );

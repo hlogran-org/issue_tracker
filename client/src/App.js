@@ -11,6 +11,7 @@ function App() {
   const [issues, setIssues] = useState([]);
   const [who, setWho] = useState(null);
   const [validUser, setValidUser] = useState(true);
+  const [loadingUsers, setLoadingUsers] = useState(true);
   const [loadingIssues, setLoadingIssues] = useState(true);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
       let response = await fetch("/users");
       const users = await response.json();
       setUsers(users);
+      setLoadingUsers(false);
 
       //check if provided user is valid
       const validUser = !who || users.some(user => user.login === who);
@@ -63,6 +65,7 @@ function App() {
               users={users}
               selected={who}
               onChange={onChangeUser}
+              loading={loadingUsers}
             />
           </Col>
         </Row>
