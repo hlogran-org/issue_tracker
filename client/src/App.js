@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Alert } from "react-bootstrap";
 import queryString from "query-string";
 import UsersDropdownList from "./components/UsersDropdownList";
 import Issue from "./components/Issue";
@@ -9,6 +9,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [issues, setIssues] = useState([]);
   const [who, setWho] = useState(null);
+  const [validUser, setValidUser] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -21,8 +22,12 @@ function App() {
       const users = await response.json();
       setUsers(users);
 
+      //check if provided user is valid
+      const validUser = !who || users.some(user => user.login === who);
+      setValidUser(validUser);
+
       //fetch issues
-      const url = who ? `/users/${who}/issues` : "/issues";
+      const url = who && validUser ? `/users/${who}/issues` : "/issues";
       response = await fetch(url);
       const issues = await response.json();
       setIssues(issues);
@@ -36,24 +41,37 @@ function App() {
   };
 
   return (
-    <Container className="mt-5">
-      <Row>
-        <Col>
-          <UsersDropdownList
-            users={users}
-            selected={who}
-            onChange={onChangeUser}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          {issues.map(issue => (
-            <Issue key={issue.id} issue={issue} />
-          ))}
-        </Col>
-      </Row>
-    </Container>
+    <>
+      {!validUser && (
+        <Alert
+          variant={"danger"}
+          dismissible
+          onClose={() => {
+            setValidUser(true);
+          }}
+        >
+          The user <b>{who}</b> does not exist
+        </Alert>
+      )}
+      <Container className="mt-5">
+        <Row>
+          <Col>
+            <UsersDropdownList
+              users={users}
+              selected={who}
+              onChange={onChangeUser}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            {issues.map(issue => (
+              <Issue key={issue.id} issue={issue} />
+            ))}
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 export default App;
