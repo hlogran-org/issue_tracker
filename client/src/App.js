@@ -16,20 +16,25 @@ function App() {
 
   useEffect(() => {
     (async () => {
+      let users = [];
+      let issues = [];
+
       //get query parameter
       const { who } = queryString.parseUrl(window.location.href).query;
       setWho(who);
 
       //fetch users
       let response = await fetch("/users");
-      if (!response.ok) {
+      setLoadingUsers(false);
+      if (response.ok) {
+        users = await response.json();
+        setUsers(users);
+      } else {
         const data = await response.json();
         setError(data.error);
-      } else {
-        const users = await response.json();
-        setUsers(users);
+        setLoadingIssues(false);
+        return;
       }
-      setLoadingUsers(false);
 
       //check if provided user is valid
       const validUser = !who || users.some(user => user.login === who);
@@ -39,15 +44,15 @@ function App() {
 
       //fetch issues
       const url = who && validUser ? `/users/${who}/issues` : "/issues";
+      setLoadingIssues(false);
       response = await fetch(url);
-      if (!response.ok) {
+      if (response.ok) {
+        issues = await response.json();
+        setIssues(issues);
+      } else {
         const data = await response.json();
         setError(data.error);
-      } else {
-        const issues = await response.json();
-        setIssues(issues);
       }
-      setLoadingIssues(false);
     })();
   }, []);
 
