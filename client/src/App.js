@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./App.css";
 
 function App() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      let response = await fetch("/users");
+      const users = await response.json();
+      setUsers(users);
+      console.log(users);
+    })();
+  }, []);
+
   return (
     <Container className="mt-5">
       <Row>
