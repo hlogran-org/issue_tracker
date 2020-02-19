@@ -1,7 +1,7 @@
 # Github Issue Tracker
 ## Steps to run the application
 ### 1. Set up GitHub access
-To connect to the GitHub API, we need to set up a config file with the connection information. The file must be placed under the `server/src/config` and must be named `gh-connection.json`. The file's format is as follows:
+To connect to the GitHub API, we need to set up a config file with the connection information. The file must be placed under the `server/src/config` folder and must be named `gh-connection.json`. The file's format is as follows:
 ```
 {
   "ORGANIZATION": "some_organization_name",
@@ -13,7 +13,7 @@ To connect to the GitHub API, we need to set up a config file with the connectio
 `REPO` being the name of the repository whose issues will be tracked.  
 `TOKEN` being the OAuth token used to connect to the GitHub API.  
 
-For more information check the [README.md](server/src/config/README.md) file inside the `server/src/config`.
+For more information check the [README.md](server/src/config/README.md) file inside the `server/src/config` folder.
 ### 2. Run the project
 This can be done in two ways: manually or, if you are a docker user, with docker-compose.
 #### Manually
@@ -29,7 +29,7 @@ npm install
 npm start
 ```
 #### docker-compose
-With docker-compose, this can be done with a single instruction, run from the project's base folder:
+With docker-compose, this can be done with a single instruction run from the project's base folder:
 ```
 docker-compose up
 ```
